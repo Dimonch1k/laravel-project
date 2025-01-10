@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController as AdminAdminDashboardController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,8 @@ Route::get('/dashboard', function () {
 	return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('admin')->middleware('auth')->as('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->as('admin.')->group(function () {
+	Route::get('/', [AdminAdminDashboardController::class, 'index'])->name('dashboard');
 	Route::resource('categories', CategoryController::class);
 	Route::resource('products', ProductController::class);
 });

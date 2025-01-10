@@ -6,9 +6,9 @@
 
     {{-- Name --}}
     <div class="mb-4">
-        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <label for="name" class="block text-sm font-medium dark:text-gray-100 text-gray-700">Name</label>
         <input type="text" id="name" name="name"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="mt-1 block w-full px-3 py-2 dark:text-white dark:bg-gray-600 dark:border-gray-800 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value="{{ old('name', $product->name ?? '') }}" required>
         @error('name')
             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
@@ -17,9 +17,9 @@
 
     {{-- Price --}}
     <div class="mb-4">
-        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+        <label for="price" class="block text-sm font-medium dark:text-gray-100 text-gray-700">Price</label>
         <input type="number" id="price" name="price"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="mt-1 block w-full px-3 py-2 dark:text-white dark:bg-gray-600 dark:border-gray-800 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value="{{ old('price', $product->price ?? '') }}" required>
         @error('price')
             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
@@ -28,9 +28,9 @@
 
     {{-- Category --}}
     <div class="mb-4">
-        <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
+        <label for="category_id" class="block text-sm font-medium dark:text-gray-100 text-gray-700">Category</label>
         <select id="category_id" name="category_id"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="mt-1 block w-full px-3 py-2 dark:text-white dark:bg-gray-600 dark:border-gray-800 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required>
             <option value="">Select a category</option>
             @foreach ($categories as $category)
@@ -47,9 +47,9 @@
 
     {{-- Image --}}
     <div class="mb-4">
-        <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+        <label for="image" class="block text-sm font-medium dark:text-gray-100 text-gray-700">Image</label>
         <input type="file" id="image" name="image"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            class="mt-1 block w-full px-3 py-2 dark:text-white dark:bg-gray-600 dark:border-gray-800 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         @error('image')
             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
         @enderror
