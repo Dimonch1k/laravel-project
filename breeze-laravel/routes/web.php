@@ -1,50 +1,45 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController as AdminAdminDashboardController;
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Admin Routes
+Route::prefix('admin')
+	->middleware(['auth', 'admin'])
+	->as('admin.')
+	->group(function () {
+		Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+	});
 
-// MY APIs
+Route::resource('categories', CategoryController::class);
 
-// Route::get('/', [MainController::class, 'index'])->name('home');
-// Route::get('contacts', [MainController::class, 'contacts'])->name('contacts');
-// Route::post('send-message', [MainController::class, 'sendEmail'])->name('send-message');
+Route::resource('products', ProductController::class);
+Route::get('products/sort/{category}', [ProductController::class, 'filterByCategory'])->name('products.filter');
 
-// Route::prefix('admin')->group(function () {
-// 	Route::resource('admin/categories', CategoryController::class);
-// 	Route::resource('admin/products', ProductController::class);
-// });
-
-
-// BREEZE APIs
+// Home Route
 Route::get('/', function () {
 	return view('welcome');
 });
 
+// Dashboard Route (for all authenticated users, except admins)
 Route::get('/dashboard', function () {
+	if (auth()->user()->role === 'admin') {
+		return redirect()->route('admin.dashboard');
+	}
 	return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->as('admin.')->group(function () {
-	Route::get('/', [AdminAdminDashboardController::class, 'index'])->name('dashboard');
-	Route::resource('categories', CategoryController::class);
-	Route::resource('products', ProductController::class);
-});
 
+// Product Routes (for all users)
+// Route::middleware('auth')->group(function () {
+// 	Route::resource('products', ProductController::class);
+// 	Route::get('products/sort/{category}', [ProductController::class, 'filterByCategory'])->name('products.filter');
+// });
+
+// Profile Routes
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -2,52 +2,39 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // // Disable foreign key checks
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('products')->truncate();
+        DB::table('categories')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // // Truncate tables
-        // DB::table('products')->truncate();
-        // DB::table('categories')->truncate();
+        $categories = [
+            ['name' => 'Shopping', 'description' => 'Buy everything you want'],
+            ['name' => 'Shirts', 'description' => 'High quality + best price'],
+            ['name' => 'Pets', 'description' => 'High level material for your lovely pets'],
+            ['name' => 'Music', 'description' => 'Listen to best tracks for hours'],
+            ['name' => 'Food', 'description' => 'The best in Ukraine'],
+        ];
 
-        // // Re-enable foreign key checks
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        foreach ($categories as $categoryData) {
+            $category = Category::create($categoryData);
 
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // Category::factory()->create([
-        //     'name' => 'Category 1',
-        //     'description' => 'Description 1',
-        // ]);
-
-        // Category::factory()->create([
-        //     'name' => 'Category 2',
-        //     'description' => 'Description 2',
-        // ]);
-
-
-
-        Category::factory(10)->count(5)->hasProducts(10)->create();
-        Product::factory(10)->create();
+            for ($i = 0; $i < 10; $i++) {
+                Product::create([
+                    'name' => $category['name'] . ' Product ' . ($i + 1),
+                    'description' => $category['name'],
+                    'price' => rand(100, 1000),
+                    'category_id' => $category->id,
+                ]);
+            }
+        }
     }
 }

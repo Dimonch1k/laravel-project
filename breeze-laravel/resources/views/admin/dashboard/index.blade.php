@@ -41,14 +41,17 @@
             <div class="mt-6">
                 <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h3 class="text-xl font-semibold dark:text-gray-100 text-gray-800 mb-4">
-                            {{ __('Recent Products') }}</h3>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold dark:text-gray-100 text-gray-800 mb-4">
+                                {{ __('Recent Products') }}</h3>
+                            <x-products.create-product-button />
+                        </div>
 
                         {{-- Product Table --}}
                         <x-products.product-table :products="$products" />
 
                         {{-- Pagination --}}
-                        <div class="mt-4">{{ $products->links() }}</div>
+                        {{-- <div class="mt-4">{{ $products->links() }}</div> --}}
                     </div>
                 </div>
             </div>

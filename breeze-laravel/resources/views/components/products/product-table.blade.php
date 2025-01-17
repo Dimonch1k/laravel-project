@@ -8,7 +8,6 @@
                             class="w-auto max-h-28 object-cover">
                     </div>
 
-
                     <div class="grid mb-4">
                         <h5 class="text-2xl mb-4 font-semibold dark:text-gray-200 text-gray-800">{{ $product->name }}
                         </h5>
@@ -25,11 +24,12 @@
                             </p>
                         </div>
                     </div>
-
-                    <div class="grid sm:flex sm:space-x-4 ">
-                        <x-products.edit-product-button :product="$product" />
-                        <x-products.delete-product-button :product="$product" />
-                    </div>
+                    @if (auth()->check() && auth()->user()->role == 'admin')
+                        <div class="grid sm:flex sm:space-x-4 ">
+                            <x-products.edit-product-button :product="$product" />
+                            <x-products.delete-product-button :product="$product" />
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach

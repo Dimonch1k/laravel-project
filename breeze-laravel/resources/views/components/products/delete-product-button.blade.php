@@ -1,4 +1,4 @@
-<form action="{{ route('admin.products.destroy', $product->id) }}" method="post">
+<form action="{{ route('products.destroy', $product->id) }}" method="post">
     @csrf
     @method('DELETE')
     <button type="submit"

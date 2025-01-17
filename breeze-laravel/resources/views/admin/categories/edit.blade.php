@@ -8,8 +8,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="dark:bg-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <x-categories.category-form :category="$category"
-                        action="{{ route('admin.categories.update', $category) }}" method="PUT" />
+                    <x-categories.category-form :category="$category" action="{{ route('categories.update', $category) }}"
+                        method="PUT" />
                 </div>
             </div>
         </div>

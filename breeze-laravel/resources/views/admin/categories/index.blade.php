@@ -15,7 +15,9 @@
             <div class="dark:bg-gray-700 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 gap-4">
                     <!-- Create Category Button -->
-                    <x-categories.create-category-button />
+                    @if (auth()->check() && auth()->user()->role === 'admin')
+                        <x-categories.create-category-button />
+                    @endif
 
                     <!-- Category Table -->
                     <x-categories.category-table :categories="$categories" />
