@@ -22,7 +22,7 @@ Route::get('products/sort/{category}', [ProductController::class, 'filterByCateg
 // Home Route
 Route::get('/', function () {
 	return view('welcome');
-});
+})->name('home');
 
 // Dashboard Route (for all authenticated users, except admins)
 Route::get('/dashboard', function () {
