@@ -17,7 +17,7 @@ Route::prefix('admin')
 Route::resource('categories', CategoryController::class);
 
 Route::resource('products', ProductController::class);
-Route::get('products/sort/{category}', [ProductController::class, 'filterByCategory'])->name('products.filter');
+Route::get('products/sort/category/{category:slug}', [ProductController::class, 'filterByCategory'])->name('products.filter');
 
 // Home Route
 Route::get('/', function () {
